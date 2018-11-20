@@ -1,0 +1,146 @@
+{
+    "swagger": "2.0",
+    "basePath": "/",
+    "paths": {
+        "/books": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "operationId": "get_total_books",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "type": "string",
+                        "enum": [
+                            "Identifier",
+                            "Place of Publication",
+                            "Date of Publication",
+                            "Publisher",
+                            "Title",
+                            "Author",
+                            "Flickr URL"
+                        ],
+                        "collectionFormat": "multi"
+                    },
+                    {
+                        "name": "ascent",
+                        "in": "query",
+                        "type": "boolean"
+                    }
+                ],
+                "tags": [
+                    "default"
+                ]
+            }
+        },
+        "/books/{book_id}": {
+            "parameters": [
+                {
+                    "name": "book_id",
+                    "in": "path",
+                    "required": true,
+                    "type": "integer"
+                }
+            ],
+            "delete": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "operationId": "delete_books",
+                "tags": [
+                    "default"
+                ]
+            },
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "operationId": "get_books",
+                "tags": [
+                    "default"
+                ]
+            },
+            "put": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "operationId": "put_books",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/book"
+                        }
+                    }
+                ],
+                "tags": [
+                    "default"
+                ]
+            }
+        }
+    },
+    "info": {
+        "title": "API",
+        "version": "1.0"
+    },
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "tags": [
+        {
+            "name": "default",
+            "description": "Default namespace"
+        }
+    ],
+    "definitions": {
+        "book": {
+            "properties": {
+                "Identifier": {
+                    "type": "integer"
+                },
+                "Place of Publication": {
+                    "type": "string"
+                },
+                "Date of Publication": {
+                    "type": "integer"
+                },
+                "Publisher": {
+                    "type": "string"
+                },
+                "Title": {
+                    "type": "string"
+                },
+                "Author": {
+                    "type": "string"
+                },
+                "Flickr URL": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "responses": {
+        "ParseError": {
+            "description": "When a mask can't be parsed"
+        },
+        "MaskError": {
+            "description": "When any error occurs on mask"
+        }
+    }
+}
